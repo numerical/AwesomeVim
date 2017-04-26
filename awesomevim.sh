@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 VIM_BIN="gvim"
-# get current awesome tag
+# get current desktop tag id and name
 read -r curr_tag_id curr_tag_name <<< "$(wmctrl -d | awk '$2 == "*" {print $1, $NF}')"
 
 # iterate through list of gvim servers
