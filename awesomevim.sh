@@ -16,8 +16,12 @@ done
 
 if [[ -z "$tag_server" ]]; then
   # Open a new vim server but don't add any files just yet
-  $VIM_BIN --servername "$curr_tag_name"
   tag_server="$curr_tag_name"
+  $VIM_BIN --servername "$tag_server"
+  # bit hacky but the vim server is opened asynchronously so we need to wait for it to exist before we continue
+  while [[ $($VIM_BIN --serverlist | egrep -i "^${tag_server}$" 2>/dev/null | wc -l) -ne 1 ]]; do
+    sleep 0.01
+  done
 fi
 
 if [[ "$#" -gt 0 ]]; then
