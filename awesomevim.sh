@@ -15,7 +15,6 @@ for servername in $($VIM_BIN --serverlist); do
 done
 
 if [[ -z "$tag_server" ]]; then
-  # Open a new vim server but don't add any files just yet
   tag_server="$curr_tag_name"
   $VIM_BIN --servername "$tag_server" "$@"
 else
